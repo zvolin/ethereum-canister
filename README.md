@@ -1,6 +1,7 @@
 # Start a testnet
 
 ```bash
+
 dfx start --clean
 ```
 

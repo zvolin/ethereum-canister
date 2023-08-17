@@ -1,0 +1,4 @@
+Running dfx start for version 0.14.3
+Using the default definition for the 'local' shared network because /home/zwolin/.config/dfx/networks.json does not exist.
+Initialized replica.
+Dashboard: http://localhost:37759/_/dashboard

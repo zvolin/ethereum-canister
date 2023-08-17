@@ -1,0 +1,534 @@
+Running dfx start for version 0.14.3
+Using the default definition for the 'local' shared network because /home/zwolin/.config/dfx/networks.json does not exist.
+Initialized replica.
+Dashboard: http://localhost:44291/_/dashboard
+Deploying all canisters.
+Creating a wallet canister on the local network.
+The wallet canister on the "local" network for user "zwolin2" is "bnz7o-iuaaa-aaaaa-qaaaa-cai"
+Creating canisters...
+Creating canister ethereum_canister...
+ethereum_canister canister created with canister id: bkyz2-fmaaa-aaaaa-qaaaq-cai
+Building canisters...
+Checking for vulnerabilities in rust canisters.
+[0m[0m[1m[32m    Fetching[0m advisory database from `https://github.com/RustSec/advisory-db.git`
+[0m[0m[1m[32m      Loaded[0m 557 security advisories (from /home/zwolin/.cargo/advisory-db)
+[0m[0m[1m[32m    Updating[0m crates.io index
+[0m[0m[1m[32m    Scanning[0m Cargo.lock for vulnerabilities (440 crate dependencies)
+Audit found no vulnerabilities.
+Executing: cargo build --target wasm32-unknown-unknown --release -p ethereum_canister --locked
+warning: method `start_advance_thread` is never used
+   --> /data/eiger/icp/helios/client/src/client.rs:362:8
+    |
+247 | impl<DB: Database> Client<DB> {
+    | ----------------------------- method in this implementation
+...
+362 |     fn start_advance_thread(&self) {
+    |        ^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `client` (lib) generated 1 warning
+    Finished release [optimized] target(s) in 0.69s
+Installing canisters...
+Creating UI canister on the local network.
+The UI canister on the "local" network is "bd3sg-teaaa-aaaaa-qaaba-cai"
+Installing code for canister ethereum_canister, with canister ID bkyz2-fmaaa-aaaaa-qaaaq-cai
+Deployed canisters.
+URLs:
+  Backend canister via Candid interface:
+    ethereum_canister: http://127.0.0.1:4943/?canisterId=bd3sg-teaaa-aaaaa-qaaba-cai&id=bkyz2-fmaaa-aaaaa-qaaaq-cai
+2023-08-16 13:08:45.671845273 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/headers/finalized
+2023-08-16 13:08:47.618996833 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/headers/finalized
+2023-08-16 13:08:49.746683561 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 653b
+2023-08-16 13:08:49.746683561 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:08:49.746683561 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 61
+2023-08-16 13:08:51.847242353 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 40b
+2023-08-16 13:08:51.847242353 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v1/config/spec
+2023-08-16 13:08:53.335476647 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/config/spec
+2023-08-16 13:08:54.820663959 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 3874b
+2023-08-16 13:08:54.820663959 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/light_client/bootstrap/0x845ace77701c55b154fc17f4f289d231a64441069df847feda371a1c23e35632
+2023-08-16 13:08:56.307358326 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/light_client/bootstrap/0x845ace77701c55b154fc17f4f289d231a64441069df847feda371a1c23e35632
+2023-08-16 13:08:58.101516708 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 54294b
+2023-08-16 13:08:58.101516708 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/light_client/updates?start_period=868&count=128
+2023-08-16 13:09:00.302020658 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/light_client/updates?start_period=868&count=128
+2023-08-16 13:09:02.085370428 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 57122b
+2023-08-16 13:09:02.085370428 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/light_client/finality_update
+2023-08-16 13:09:04.191297164 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/light_client/finality_update
+2023-08-16 13:09:05.715229813 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 4923b
+2023-08-16 13:09:05.715229813 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/light_client/optimistic_update
+2023-08-16 13:09:07.772642275 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/light_client/optimistic_update
+2023-08-16 13:09:09.275722583 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 2465b
+2023-08-16 13:09:09.275722583 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113942
+2023-08-16 13:09:11.376158182 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113942
+2023-08-16 13:09:13.465182996 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 152048b
+2023-08-16 13:09:13.465182996 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113856
+2023-08-16 13:09:14.957626379 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113856
+2023-08-16 13:09:17.176303625 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 426600b
+2023-08-16 13:09:17.176303625 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113942
+2023-08-16 13:09:18.711526 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113942
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 152048b
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113941
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113940
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113939
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113938
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113937
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113936
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113935
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113934
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113933
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113932
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113931
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113930
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113929
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113928
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113927
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113926
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113925
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113924
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113923
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113922
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113921
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113920
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113919
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113918
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113917
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113916
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113915
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113914
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113913
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113912
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113911
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113910
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113909
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113908
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113907
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113906
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113905
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113904
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113903
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113902
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113901
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113900
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113899
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113898
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113897
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113896
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113895
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113894
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113893
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113892
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113891
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113890
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113889
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113888
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113887
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113886
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113885
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113884
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113883
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113882
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113881
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113880
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113879
+2023-08-16 13:09:20.773908048 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113878
+2023-08-16 13:09:22.286455663 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113938
+2023-08-16 13:09:22.586979586 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113937
+2023-08-16 13:09:22.586979586 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113940
+2023-08-16 13:09:22.586979586 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113941
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113920
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113921
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113922
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113923
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113926
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113927
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113928
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113929
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113930
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113931
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113932
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113933
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113934
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113935
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113936
+2023-08-16 13:09:22.888928660 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113939
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113878
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113879
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113880
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113881
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113882
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113883
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113884
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113885
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113886
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113887
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113888
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113889
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113890
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113891
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113892
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113893
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113894
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113895
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113896
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113897
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113898
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113899
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113900
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113901
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113902
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113903
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113904
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113905
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113906
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113907
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113908
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113909
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113910
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113911
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113912
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113913
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113914
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113915
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113916
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113917
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113918
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113919
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113924
+2023-08-16 13:09:23.198049595 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113925
+2023-08-16 13:09:24.224273367 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 388757b
+2023-08-16 13:09:24.332621267 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 198600b
+2023-08-16 13:09:24.760459699 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 177135b
+2023-08-16 13:09:24.760459699 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 188824b
+2023-08-16 13:09:24.760459699 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 431794b
+2023-08-16 13:09:25.226659563 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 388769b
+2023-08-16 13:09:25.226659563 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 413402b
+2023-08-16 13:09:25.226659563 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 313234b
+2023-08-16 13:09:25.226659563 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 200597b
+2023-08-16 13:09:25.226659563 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 692049b
+2023-08-16 13:09:25.389282207 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 802195b
+2023-08-16 13:09:25.389282207 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 432920b
+2023-08-16 13:09:25.600990966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 152066b
+2023-08-16 13:09:25.600990966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 195976b
+2023-08-16 13:09:25.600990966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 192486b
+2023-08-16 13:09:25.600990966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 531605b
+2023-08-16 13:09:25.600990966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 179673b
+2023-08-16 13:09:25.600990966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 765058b
+2023-08-16 13:09:25.957248992 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 416005b
+2023-08-16 13:09:25.957248992 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 390628b
+2023-08-16 13:09:26.191467555 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 571750b
+2023-08-16 13:09:26.191467555 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 404442b
+2023-08-16 13:09:26.191467555 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 193917b
+2023-08-16 13:09:26.191467555 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 486988b
+2023-08-16 13:09:26.628085906 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 282662b
+2023-08-16 13:09:26.628085906 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 195458b
+2023-08-16 13:09:26.628085906 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 514960b
+2023-08-16 13:09:26.628085906 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 1336760b
+2023-08-16 13:09:27.071056958 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 528529b
+2023-08-16 13:09:27.071056958 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 325242b
+2023-08-16 13:09:27.071056958 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 720870b
+2023-08-16 13:09:27.548668983 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 455060b
+2023-08-16 13:09:27.548668983 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 333791b
+2023-08-16 13:09:27.548668983 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 506474b
+2023-08-16 13:09:27.548668983 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 741040b
+2023-08-16 13:09:27.816369599 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 501078b
+2023-08-16 13:09:27.816369599 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 471766b
+2023-08-16 13:09:27.816369599 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 320673b
+2023-08-16 13:09:27.816369599 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 867425b
+2023-08-16 13:09:28.346761830 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 304454b
+2023-08-16 13:09:28.346761830 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 207254b
+2023-08-16 13:09:28.346761830 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 935614b
+2023-08-16 13:09:29.039553388 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 359833b
+2023-08-16 13:09:29.039553388 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 571894b
+2023-08-16 13:09:29.039553388 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 682933b
+2023-08-16 13:09:30.081048680 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 854904b
+2023-08-16 13:09:30.081048680 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 364036b
+2023-08-16 13:09:30.081048680 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 312326b
+2023-08-16 13:09:30.384740963 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 672305b
+2023-08-16 13:09:30.384740963 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 367849b
+2023-08-16 13:09:30.384740963 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 459098b
+2023-08-16 13:09:30.913698088 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 809499b
+2023-08-16 13:09:30.913698088 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 542210b
+2023-08-16 13:09:30.913698088 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 540927b
+2023-08-16 13:09:31.257315384 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 353349b
+2023-08-16 13:09:31.257315384 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 526605b
+2023-08-16 13:09:31.257315384 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 349882b
+2023-08-16 13:09:31.257315384 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 312216b
+2023-08-16 13:09:32.201487662 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 498913b
+2023-08-16 13:09:32.201487662 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 346084b
+2023-08-16 13:09:32.201487662 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 565121b
+2023-08-16 13:09:32.201487662 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 475386b
+2023-08-16 13:09:32.701643393 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 594209b
+2023-08-16 13:09:32.701643393 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 399328b
+2023-08-16 13:09:32.701643393 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [WARN  ethereum_canister] Setup instructions: 663234003
+2023-08-16 13:09:32.701643393 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [WARN  ethereum_canister] Setup balance diff: 239831375405
+()
+Canister status call result for ethereum_canister.
+Status: Running
+Controllers: bnz7o-iuaaa-aaaaa-qaaaa-cai k3aal-kmbpv-g4pme-jprzt-bakbj-pxslp-uwg6u-khbky-q7vdl-oicgj-nqe
+Memory allocation: 0
+Compute allocation: 0
+Freezing threshold: 2_592_000
+Memory Size: Nat(55023407)
+Balance: 2_852_022_578_126 Cycles
+Module hash: 0xc84e898a4c2cb259a397262c69dda26a5faa35b281c0303b972aae4337c3d857
+2023-08-16 13:09:36.731086554 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:09:36.731086554 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 313
+2023-08-16 13:09:41.870782828 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 281b
+2023-08-16 13:09:41.870782828 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:09:41.870782828 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 256
+2023-08-16 13:09:41.870782828 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:09:41.870782828 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 119
+2023-08-16 13:09:41.870782828 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:09:41.870782828 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 119
+2023-08-16 13:09:41.870782828 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:09:41.870782828 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 119
+2023-08-16 13:09:43.920731454 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7607b
+2023-08-16 13:09:43.920731454 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7712b
+2023-08-16 13:09:44.258526344 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7866b
+2023-08-16 13:09:44.258526344 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:09:44.258526344 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 115
+2023-08-16 13:09:44.258526344 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 19853b
+2023-08-16 13:09:44.258526344 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:09:44.258526344 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 115
+2023-08-16 13:09:46.056171607 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21123b
+2023-08-16 13:09:46.056171607 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21123b
+2023-08-16 13:09:46.056171607 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:09:46.056171607 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 187
+2023-08-16 13:09:48.283949540 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 13698b
+2023-08-16 13:09:48.283949540 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:09:48.283949540 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 115
+2023-08-16 13:09:50.082705350 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21123b
+2023-08-16 13:09:50.082705350 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:09:50.082705350 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 256
+2023-08-16 13:09:51.927416752 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 19853b
+2023-08-16 13:09:51.927416752 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:09:51.927416752 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:09:54.049414602 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:09:54.049414602 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [WARN  ethereum_canister] Erc721 owner of instructions: 22999515
+2023-08-16 13:09:54.049414602 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [WARN  ethereum_canister] Erc721 owner of balance diff: 17653495326
+("0xd4416b13d2b3a9abae7acd5d6c2bbdbe25686401")
+Canister status call result for ethereum_canister.
+Status: Running
+Controllers: bnz7o-iuaaa-aaaaa-qaaaa-cai k3aal-kmbpv-g4pme-jprzt-bakbj-pxslp-uwg6u-khbky-q7vdl-oicgj-nqe
+Memory allocation: 0
+Compute allocation: 0
+Freezing threshold: 2_592_000
+Memory Size: Nat(55023407)
+Balance: 2_834_368_105_972 Cycles
+Module hash: 0xc84e898a4c2cb259a397262c69dda26a5faa35b281c0303b972aae4337c3d857
+Canister status call result for ethereum_canister.
+Status: Running
+Controllers: bnz7o-iuaaa-aaaaa-qaaaa-cai k3aal-kmbpv-g4pme-jprzt-bakbj-pxslp-uwg6u-khbky-q7vdl-oicgj-nqe
+Memory allocation: 0
+Compute allocation: 0
+Freezing threshold: 2_592_000
+Memory Size: Nat(55023407)
+Balance: 2_834_368_004_742 Cycles
+Module hash: 0xc84e898a4c2cb259a397262c69dda26a5faa35b281c0303b972aae4337c3d857
+2023-08-16 13:09:58.206012561 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:09:58.206012561 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 313
+2023-08-16 13:10:00.514350986 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 281b
+2023-08-16 13:10:00.514350986 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:00.514350986 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 257
+2023-08-16 13:10:00.514350986 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:00.514350986 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 120
+2023-08-16 13:10:00.514350986 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:00.514350986 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 120
+2023-08-16 13:10:00.514350986 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:00.514350986 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 120
+2023-08-16 13:10:02.313720491 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7608b
+2023-08-16 13:10:02.313720491 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7867b
+2023-08-16 13:10:02.313720491 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:02.313720491 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:02.864977432 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7713b
+2023-08-16 13:10:02.864977432 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 19854b
+2023-08-16 13:10:02.864977432 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:02.864977432 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:04.815201003 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:04.815201003 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:04.815201003 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:04.815201003 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 188
+2023-08-16 13:10:06.615100915 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 13699b
+2023-08-16 13:10:06.615100915 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:06.615100915 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:08.572527724 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:08.572527724 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:08.572527724 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 257
+2023-08-16 13:10:10.734614220 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 19854b
+2023-08-16 13:10:10.734614220 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:10.734614220 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:12.653377051 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:12.653377051 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [WARN  ethereum_canister] Erc721 owner of instructions: 23011079
+2023-08-16 13:10:12.653377051 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [WARN  ethereum_canister] Erc721 owner of balance diff: 17653493831
+("0xd4416b13d2b3a9abae7acd5d6c2bbdbe25686401")
+Canister status call result for ethereum_canister.
+Status: Running
+Controllers: bnz7o-iuaaa-aaaaa-qaaaa-cai k3aal-kmbpv-g4pme-jprzt-bakbj-pxslp-uwg6u-khbky-q7vdl-oicgj-nqe
+Memory allocation: 0
+Compute allocation: 0
+Freezing threshold: 2_592_000
+Memory Size: Nat(55023407)
+Balance: 2_816_713_534_134 Cycles
+Module hash: 0xc84e898a4c2cb259a397262c69dda26a5faa35b281c0303b972aae4337c3d857
+Canister status call result for ethereum_canister.
+Status: Running
+Controllers: bnz7o-iuaaa-aaaaa-qaaaa-cai k3aal-kmbpv-g4pme-jprzt-bakbj-pxslp-uwg6u-khbky-q7vdl-oicgj-nqe
+Memory allocation: 0
+Compute allocation: 0
+Freezing threshold: 2_592_000
+Memory Size: Nat(55023407)
+Balance: 2_816_713_427_898 Cycles
+Module hash: 0xc84e898a4c2cb259a397262c69dda26a5faa35b281c0303b972aae4337c3d857
+2023-08-16 13:10:15.902988202 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:15.902988202 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 313
+2023-08-16 13:10:17.890093720 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 281b
+2023-08-16 13:10:17.890093720 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:17.890093720 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 257
+2023-08-16 13:10:17.890093720 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:17.890093720 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 120
+2023-08-16 13:10:17.890093720 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:17.890093720 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 120
+2023-08-16 13:10:17.890093720 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:17.890093720 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 120
+2023-08-16 13:10:19.648244014 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7608b
+2023-08-16 13:10:19.648244014 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7867b
+2023-08-16 13:10:19.648244014 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:19.648244014 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:19.648244014 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7713b
+2023-08-16 13:10:19.648244014 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 19854b
+2023-08-16 13:10:19.648244014 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:19.648244014 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:21.387603989 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:21.387603989 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:21.387603989 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:21.387603989 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 188
+2023-08-16 13:10:23.265524647 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 13699b
+2023-08-16 13:10:23.265524647 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:23.265524647 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:24.751638215 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:24.751638215 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:24.751638215 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 257
+2023-08-16 13:10:26.519515691 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 19854b
+2023-08-16 13:10:26.519515691 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:26.519515691 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:28.378065711 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:28.378065711 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [WARN  ethereum_canister] Erc721 owner of instructions: 23010560
+2023-08-16 13:10:28.378065711 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [WARN  ethereum_canister] Erc721 owner of balance diff: 17653496285
+("0xd4416b13d2b3a9abae7acd5d6c2bbdbe25686401")
+Canister status call result for ethereum_canister.
+Status: Running
+Controllers: bnz7o-iuaaa-aaaaa-qaaaa-cai k3aal-kmbpv-g4pme-jprzt-bakbj-pxslp-uwg6u-khbky-q7vdl-oicgj-nqe
+Memory allocation: 0
+Compute allocation: 0
+Freezing threshold: 2_592_000
+Memory Size: Nat(55023407)
+Balance: 2_799_058_954_864 Cycles
+Module hash: 0xc84e898a4c2cb259a397262c69dda26a5faa35b281c0303b972aae4337c3d857
+Canister status call result for ethereum_canister.
+Status: Running
+Controllers: bnz7o-iuaaa-aaaaa-qaaaa-cai k3aal-kmbpv-g4pme-jprzt-bakbj-pxslp-uwg6u-khbky-q7vdl-oicgj-nqe
+Memory allocation: 0
+Compute allocation: 0
+Freezing threshold: 2_592_000
+Memory Size: Nat(55023407)
+Balance: 2_799_058_853_634 Cycles
+Module hash: 0xc84e898a4c2cb259a397262c69dda26a5faa35b281c0303b972aae4337c3d857
+2023-08-16 13:10:32.395141425 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:32.395141425 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 313
+2023-08-16 13:10:34.124650966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 281b
+2023-08-16 13:10:34.124650966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:34.124650966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 257
+2023-08-16 13:10:34.124650966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:34.124650966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 120
+2023-08-16 13:10:34.124650966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:34.124650966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 120
+2023-08-16 13:10:34.124650966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:34.124650966 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 120
+2023-08-16 13:10:35.611350121 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7608b
+2023-08-16 13:10:35.611350121 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7867b
+2023-08-16 13:10:35.611350121 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:35.611350121 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:35.611350121 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7713b
+2023-08-16 13:10:35.611350121 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 19854b
+2023-08-16 13:10:35.611350121 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:35.611350121 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:37.795847145 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:37.795847145 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:37.795847145 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:37.795847145 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 188
+2023-08-16 13:10:39.742925188 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 13699b
+2023-08-16 13:10:39.742925188 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:39.742925188 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:42.424620567 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:42.424620567 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:42.424620567 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 257
+2023-08-16 13:10:43.940213984 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 19854b
+2023-08-16 13:10:43.940213984 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:43.940213984 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:45.441266393 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:45.441266393 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [WARN  ethereum_canister] Erc721 owner of instructions: 23010462
+2023-08-16 13:10:45.441266393 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [WARN  ethereum_canister] Erc721 owner of balance diff: 17653498044
+("0xd4416b13d2b3a9abae7acd5d6c2bbdbe25686401")
+Canister status call result for ethereum_canister.
+Status: Running
+Controllers: bnz7o-iuaaa-aaaaa-qaaaa-cai k3aal-kmbpv-g4pme-jprzt-bakbj-pxslp-uwg6u-khbky-q7vdl-oicgj-nqe
+Memory allocation: 0
+Compute allocation: 0
+Freezing threshold: 2_592_000
+Memory Size: Nat(55023407)
+Balance: 2_781_404_378_781 Cycles
+Module hash: 0xc84e898a4c2cb259a397262c69dda26a5faa35b281c0303b972aae4337c3d857
+Canister status call result for ethereum_canister.
+Status: Running
+Controllers: bnz7o-iuaaa-aaaaa-qaaaa-cai k3aal-kmbpv-g4pme-jprzt-bakbj-pxslp-uwg6u-khbky-q7vdl-oicgj-nqe
+Memory allocation: 0
+Compute allocation: 0
+Freezing threshold: 2_592_000
+Memory Size: Nat(55023407)
+Balance: 2_781_404_277_551 Cycles
+Module hash: 0xc84e898a4c2cb259a397262c69dda26a5faa35b281c0303b972aae4337c3d857
+2023-08-16 13:10:48.606548780 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:48.606548780 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 313
+2023-08-16 13:10:50.111472284 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 281b
+2023-08-16 13:10:50.111472284 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:50.111472284 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 257
+2023-08-16 13:10:50.111472284 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:50.111472284 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 120
+2023-08-16 13:10:50.111472284 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:50.111472284 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 120
+2023-08-16 13:10:50.111472284 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:50.111472284 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 120
+2023-08-16 13:10:51.551305837 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7608b
+2023-08-16 13:10:51.551305837 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7867b
+2023-08-16 13:10:51.551305837 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:51.551305837 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:51.551305837 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 7713b
+2023-08-16 13:10:51.551305837 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 19854b
+2023-08-16 13:10:51.551305837 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:51.551305837 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:53.294589154 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:53.294589154 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:53.294589154 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:53.294589154 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 188
+2023-08-16 13:10:55.546403298 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 13699b
+2023-08-16 13:10:55.546403298 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:55.546403298 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:10:57.088976090 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:10:57.088976090 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:57.088976090 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 257
+2023-08-16 13:10:58.578288527 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 19854b
+2023-08-16 13:10:58.578288527 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] POST https://ethereum.publicnode.com
+2023-08-16 13:10:58.578288527 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] request size: 116
+2023-08-16 13:11:00.723154056 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [ERROR common::http::icp] resp size: 21124b
+2023-08-16 13:11:00.723154056 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [WARN  ethereum_canister] Erc721 owner of instructions: 23009690
+2023-08-16 13:11:00.723154056 UTC: [Canister bkyz2-fmaaa-aaaaa-qaaaq-cai] [WARN  ethereum_canister] Erc721 owner of balance diff: 17653494574
+("0xd4416b13d2b3a9abae7acd5d6c2bbdbe25686401")
+Canister status call result for ethereum_canister.
+Status: Running
+Controllers: bnz7o-iuaaa-aaaaa-qaaaa-cai k3aal-kmbpv-g4pme-jprzt-bakbj-pxslp-uwg6u-khbky-q7vdl-oicgj-nqe
+Memory allocation: 0
+Compute allocation: 0
+Freezing threshold: 2_592_000
+Memory Size: Nat(55023407)
+Balance: 2_763_749_806_197 Cycles
+Module hash: 0xc84e898a4c2cb259a397262c69dda26a5faa35b281c0303b972aae4337c3d857

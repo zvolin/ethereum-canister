@@ -54,7 +54,7 @@ def read_records(logfile):
                     "balance": balance,
                     "prev_memsize": last_mem_size,
                     "memsize": mem_size,
-                    "http outcalls": req_count,
+                    "https outcalls": req_count,
                     "request_sizes": requests,
                     "response_sizes": responses,
                     "payments [cycles]": internal_balance,
@@ -106,4 +106,4 @@ summary = df.groupby(["method", "variant"]).max()[[
     "https outcalls",
 ]]
 
-print(summary)
+print(summary.applymap('{:_.0f}'.format).to_markdown())

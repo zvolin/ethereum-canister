@@ -1,148 +1,134 @@
-# Start a testnet
+# Ethereum Canister
+
+Ethereum canister provides a trustless way to access Ethereum blockchain data in the ICP ecosystem.
+Under the hood, it utilises the [`helios`](https://github.com/a16z/helios) light ethereum client which
+is capable of verifying authenticity of the data it fetches.
+
+## Run and query ethereum canister
 
 ```bash
-dfx start --clean
-```
-
-# Deploy
-
-```bash
+dfx start --clean --background --artificial-delay 100
+# deploy
 dfx deploy
+# start it
+dfx canister call ethereum_canister setup 'record {
+    network = variant { Mainnet };
+    execution_rpc_url = "https://ethereum.publicnode.com";
+    consensus_rpc_url = "https://www.lightclientdata.org";
+}'
+# use it
+dfx canister call ethereum_canister erc20_balance_of 'record {
+    contract = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
+    account = "0xF977814e90dA44bFA03b6295A0616a897441aceC"
+}'
+(2_100_000_000_000_000 : nat) # canister's output
 ```
 
-# Useful links
+## Run end to end canister tests
 
-- [Quick Start](https://internetcomputer.org/docs/quickstart/quickstart-intro)
-- [SDK Developer Tools](https://internetcomputer.org/docs/developers-guide/sdk-guide)
-- [Rust Canister Devlopment Guide](https://internetcomputer.org/docs/rust-guide/rust-intro)
-- [ic-cdk](https://docs.rs/ic-cdk)
-- [ic-cdk-macros](https://docs.rs/ic-cdk-macros)
-- [Candid Introduction](https://internetcomputer.org/docs/candid-guide/candid-intro)
+```bash
+dfx start --clean --background --artificial-delay 100
 
+cargo test --target x86_64-unknown-linux-gnu
+# or using nextest
+cargo nextest run --target x86_64-unknown-linux-gnu
+```
 
-# Setup
+## Design
 
-❯ dfx canister status ethereum_canister
-Memory Size: Nat(3118888)
-Balance: 3_091_874_479_009 Cycles
+Ethereum canister is in fact a thin wrapper around the `helios` light client.
+The client is kept as a global state. After it is initialized, it runs the periodic synchronization
+with the ethereum consensus node in a background, while providing the trustless RPC access to the
+execution ethereum node using inter-canister calls API.
 
-❯ dfx canister call ethereum_canister setup 'record { network = variant { Mainnet }; execution_rpc_url = "https://ethereum.publicnode.com"; consensus_rpc_url = "https://www.lightclientdata.or
-g" }'
-()
+### Canister API
 
-❯ dfx canister status ethereum_canister
-Memory Size: Nat(49518376)
-Balance: 2_852_737_179_637 Cycles
+The api definition for the ethereum canister can be seen in the [`candid.did` file](src/ethereum_canister/candid.did).
+In addition to that, for Rust canisters, all the input types are specified in the separate crate
+[`interface`](src/interface/src/lib.rs) (will probably use a rename in a future)
+that doesn't depend on `helios` directly and uses just a much lighter `ethers-core` for that matter.
 
-[WARN  ethereum_canister] Setup instructions:     521_999_761
-[WARN  ethereum_canister] Setup balance diff: 239_120_968_259
-diff from status:                             239_137_299_372
+The canister mostly just exposes the functions from the underlying helios client. Most of the users familiar with
+ethereum will likely be familiar with them too so there is no point of trying to be innovative there. Those usually just
+have the same name, take the same arguments and returns the same types (or their `Candid` counterparts).
 
-diff of diffs:                                     16_331_113
+Depending on whether the function requires making an RPC call to the execution node or not, it's either marked as an
+`update` or `query` function. The example of queries can be `get_block_number` or `get_gas_price`, which just take information
+from already synchronized blocks. The examples of updates are calling a contracts function or estimating the gas for
+a transactions as it requires fetching addresses and other data.
 
-# Setup 2
+For the smart contract standards like the erc20 or erc721 the exposed API's are in form `${standard_name}_${function_name}`
+eg. `erc20_balance_of`. The parameters to those functions are Candid's equivalents for the parameters from contract's standard ABI.
+It is on the ethereum canister to properly encode them before making a `call`.
 
-Memory Size: Nat(3118895)
-Balance: 3_091_874_505_174 Cycles
+As for now, the only exposed function that doesn't conform to the above is the `setup` function, which configures and starts
+the helios client. It is required to be called before any other function, otherwise the called function will return an error.
+It takes urls to the consensus node and execution node the client will connect to, as well as the type of the
+network it should operate on and optional weak subjectivity checkpoint, a trusted hash of a block that nodes argee on. If not
+provided, the last checkpoint from provided consensus node will be taken. Please note that providing a checkpoint that is too old
+can result in much more https outcalls and computations needed to reach the synchronization,
+in some cases exceeding limits of an update call.
 
-❯ dfx canister call ethereum_canister setup 'record { network = variant { Mainnet }; execution_rpc_url = "https://ethereum.publicnode.com"; consensus_rpc_url = "https://www.lightclientdata.org" }' && dfx canister status ethereum_canister
+### Synchronization
 
-Memory Size: Nat(57775919)
-Balance: 2_851_961_568_938 Cycles
+The background loop is using `ic_cdk_timers::set_timer_interval` and runs in 12s interval which is
+equal to the ethereum slot time. This is the only place where the running helios client is ever mutated
+and the time of locking for updating was reduced to the required minimum which should be unnoticeable.
 
-common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/headers/finalized
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/headers/finalized
-common::http::icp] resp size: 653b
-common::http::icp] POST https://ethereum.publicnode.com
-common::http::icp] request size: 61
-common::http::icp] resp size: 40b
-common::http::icp] GET https://www.lightclientdata.org/eth/v1/config/spec
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/config/spec
-common::http::icp] resp size: 3874b
-common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/light_client/bootstrap/0x6eca17eb4352834c59af5821649985c013ab017ad956a58d1f5cd618e51a8931
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/light_client/bootstrap/0x6eca17eb4352834c59af5821649985c013ab017ad956a58d1f5cd618e51a8931
-common::http::icp] resp size: 54266b
-common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/light_client/updates?start_period=868&count=128
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/light_client/updates?start_period=868&count=128
-common::http::icp] resp size: 57122b
-common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/light_client/finality_update
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/light_client/finality_update
-common::http::icp] resp size: 4895b
-common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/light_client/optimistic_update
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/light_client/optimistic_update
-common::http::icp] resp size: 2446b
-common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113455
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113455
-common::http::icp] resp size: 215201b
-common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113376
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113376
-common::http::icp] resp size: 417564b
-common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113455
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113455
-common::http::icp] resp size: 215201b
-common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113454
-... 62 others
-common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113391
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113453
-... 62 others
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113446
-common::http::icp] resp size: 1095012b # biggest
-... 62 others
-common::http::icp] resp size: 166836b # lowest
-ethereum_canister] Setup instructions: 1643936212
-ethereum_canister] Setup balance diff: 239862088584
+### Upgrades
 
-# Setup 3
+The canister stores it's configuration and the last checkpoint it has reached in stable memory. When upgrading the canister
+it should restart helios client itself with the previous configuration and the checkpoint that was already trusted. The last
+64 blocks will be re-fetched.
 
-❯ dfx canister status ethereum_canister && dfx canister call ethereum_canister setup 'record { network = variant { Mainnet }; execution_rpc_url = "https://ethereum.publicnode.com"; consensus_rpc_url = "https://www.lightclientdata.org" }' && dfx canister status ethereum_canister
+### Error handling
 
-Memory Size: Nat(3118895)
-Balance: 3_091_874_528_946 Cycles
+Researching the approaches to the error handling in inter-canister calls yields to results: returning the `Result`s
+or just panicking when something goes wrong. The panicking way was chosen, as the `Result`s seemed less ergonomic for
+potential developers and they feel a bit inconsistent as `CallResult` already has `CanisterError` and `CanisterReject`
+variants. Also going with panics and having the state reverted felt more familiar with the smart contracts on other blockchains.
 
-Memory Size: Nat(49125167)
-Balance: 2_852_620_627_135 Cycles
+## Implementation notes
 
-common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/headers/finalized
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/headers/finalized
-common::http::icp] resp size: 653b
-common::http::icp] POST https://ethereum.publicnode.com
-common::http::icp] request size: 61
-common::http::icp] resp size: 40b
-common::http::icp] GET https://www.lightclientdata.org/eth/v1/config/spec
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/config/spec
-common::http::icp] resp size: 3874b
-common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/light_client/bootstrap/0x15ab3d4a1c4a9de6fa31147e513a0e36b1e319ee3353bd0b3992905bea17c6a7
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/light_client/bootstrap/0x15ab3d4a1c4a9de6fa31147e513a0e36b1e319ee3353bd0b3992905bea17c6a7
-common::http::icp] resp size: 54266b
-common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/light_client/updates?start_period=868&count=128
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/light_client/updates?start_period=868&count=128
-common::http::icp] resp size: 57122b
-common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/light_client/finality_update
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/light_client/finality_update
-common::http::icp] resp size: 4876b
-common::http::icp] GET https://www.lightclientdata.org/eth/v1/beacon/light_client/optimistic_update
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v1/beacon/light_client/optimistic_update
-common::http::icp] resp size: 2446b
-common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113644
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113644
-common::http::icp] resp size: 783156b
-common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113568
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113568
-common::http::icp] resp size: 483338b
-common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113644
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113644
-common::http::icp] resp size: 783156b
-common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113643
-... 62 more
-common::http::icp] GET https://www.lightclientdata.org/eth/v2/beacon/blocks/7113580
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113639
-... 62 more
-common::http::icp] GET https://beacon-nd-995-871-887.p2pify.com:443/c9dce41bab3e120f541e4ffb748efa60/eth/v2/beacon/blocks/7113632
-common::http::icp] resp size: 136705b
-... 62 more
-common::http::icp] resp size: 806236b
-ethereum_canister] Setup instructions: 719828620
-ethereum_canister] Setup balance diff: 239231484040
+### Helios
+
+The foundation of this canister. The ethereum canister depends on the `client`, `consensus`, `execution` and `common` helios crates.
+In order to be able to use a helios on the ICP it had [to be forked](https://github.com/eigerco/helios). The fork introduced many
+changes to the internals of helios thus making itself not-upstreamable in a current form. Probably it is possible to upstream
+some of those changes and maybe even making it compatible with the icp ecosystem but this is considered to be not a trivial task
+with many possible ways of achieving the goals that should be considered and brainstormed.
+The changes were made in a manner that helios still works perfectly fine for native, but when targeting wasm it only supports
+the ICP and no longer the browsers.
+
+The changes include:
+- updating the helios and making it compatible with the rust `stable` toolchain
+- getting rid of any occurences of wasm-bindgen, glue-timers and other browser related wasm dependencies
+- getting rid of tokio related stuff that is incompatible with wasm
+- using ethers-core where possible and removing ethers-providers entirely
+- replace `reqwest` with https outcalls when targeting wasm
+- update the `revm` to v3 and introduce a way to fetch missing slots outside in async manner
+- change the updating logic to only lock for the short time period and add proper shutdown and cleanup
+
+For the complete list of changes see this [comparison](https://github.com/a16z/helios/compare/master...eigerco:helios:master).
+
+### Ethers
+
+The `ethers` crate is the building block of helios and the home for most of the types from the ethereum ecosystem. It also
+provides the utilities to generate types and encoding logic from the smart contract's ABI. It would be really useful to have this
+crate working for the ICP ecosystem completely nonetheless this is considered a non trivial task. The main problems is that it
+has already a good support for browser-side wasm and some of it's subcrates utilizes not supported crates heavily. The main pain
+point we've encountered was the `ethers-providers` crate. The best way to approach this would be to support ICP in crates
+like [`instant`](https://github.com/sebcrozet/instant) and [`futures-timer`](https://github.com/async-rs/futures-timer) or even
+[`gloo-timers`](https://github.com/rustwasm/gloo), guard the http implementation behind feature flag and add a way for a user
+to add a custom provider.
+
+There was one change made to the ethers, allowing the use of `ethers-contract` without the need to depend on `ethers-providers
+and it was [already upstreamed](https://github.com/gakonst/ethers-rs/pull/2536).
+
+## Cost analysis
+
+The measurements below were taken using a local `dfx` network setup. They included additional logs and logic in canister's code and
+it's dependencies. As main cost calculation tool was a `dfx canister status` command before and after the action. Those measurements
+are definitely not precise and shouldn't be taken as a truth, rather just to shed some light on the potential costs.
 
 
-# get block number

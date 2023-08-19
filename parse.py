@@ -26,6 +26,12 @@ def read_records(logfile):
     elif "get-block-number" in logfile:
         method = "get_block_number"
         variant = ""
+    elif "get-gas-price" in logfile:
+        method = "get_gas_price"
+        variant = ""
+    elif "estimate-gas" in logfile:
+        method = "estimate_gas"
+        variant = ""
     else:
         print("unknown method")
         sys.exit(1)

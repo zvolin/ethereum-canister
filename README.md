@@ -128,7 +128,44 @@ and it was [already upstreamed](https://github.com/gakonst/ethers-rs/pull/2536).
 ## Cost analysis
 
 The measurements below were taken using a local `dfx` network setup. They included additional logs and logic in canister's code and
-it's dependencies. As main cost calculation tool was a `dfx canister status` command before and after the action. Those measurements
-are definitely not precise and shouldn't be taken as a truth, rather just to shed some light on the potential costs.
+it's dependencies. Those measurements are definitely not precise and shouldn't be taken as a truth, rather just to shed some
+light on the potential costs.
 
+|                            | call cost [cycles] | payments [cycles] |  instructions | https outcalls |
+|:---------------------------|-------------------:|------------------:|--------------:|---------------:|
+| setup                      |    122_579_275_431 |   122_553_254_989 | 1_149_129_243 |             74 |
+| advance                    |     14_126_362_419 |    12_794_806_467 |   839_856_523 |              8 |
+| get_gas_price              |            105_594 |                 0 |         5_605 |              0 |
+| get_block_number           |            101_230 |                 0 |         2_336 |              0 |
+| erc20_balance_of bnb       |     14_439_107_417 |    14_438_470_723 |    12_031_945 |              9 |
+| erc20_balance_of shiba-inu |     14_438_775_194 |    14_438_169_162 |    10_996_872 |              9 |
+| erc20_balance_of usdt      |     17_655_037_455 |    17_654_021_703 |    24_259_653 |             11 |
+| erc721_owner_of  dreadfulz |     17_656_442_523 |    17_655_209_030 |    31_469_631 |             11 |
+| erc721_owner_of  ens       |     17_654_474_853 |    17_653_498_044 |    23_011_079 |             11 |
+| erc721_owner_of  milady    |     20_866_407_305 |    20_865_374_497 |    25_107_423 |             13 |
+
+All the functions were measured with the advancing (sync loop) disabled except the advance itself.
+All the functions were measured with 5 repetitions and the maximum acquired value was presented in the table.
+
+The `setup` function was measured with fetching of the latest checkpoint from the consensus node.
+
+The 'call cost' was measured using `dfx canister status` command before and after executing the case.
+
+The 'payments' was measured using the difference between `ic_cdk::api::canister_balance` invoked at the beginning
+and the end of the function. It should reflect the amount spent for https outcalls.
+
+The 'instructions' was measured using the difference between `ic_cdk::api::performance_counter` invoked at the
+beginning and the end of the function. It should reflect the amount of wasm instructions executed during the call.
+
+The 'https outcalls' was measured counting the calls to the `http::get` and `http::post` functions.
+
+## Next steps
+
+### Optimization ideas
+
+#### https outcalls
+
+As expected the most pricey method is the `setup` call, as it has to initialize everything for the first time moreover fetching last 64 blocks.
+A maximum for the response seems to be about [2MB](https://internetcomputer.org/docs/current/developer-docs/integrations/https-outcalls/https-outcalls-how-it-works)
+and each block's response can exceed 1MB there is no way to even try safely group blocks by 2.
 

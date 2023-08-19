@@ -47,7 +47,7 @@ async fn init() {
 async fn setup(request: SetupRequest) {
     let start = ic_cdk::api::instruction_counter();
     let start_b = ic_cdk::api::canister_balance();
-    let _ = ic_logger::init_with_level(log::Level::Warn);
+    let _ = ic_logger::init_with_level(log::Level::Trace);
 
     helios::start_client(
         request.network,
@@ -92,15 +92,28 @@ async fn get_block_number() -> Nat {
 
 #[query]
 async fn get_gas_price() -> U256 {
+    let start = ic_cdk::api::instruction_counter();
+    let start_b = ic_cdk::api::canister_balance();
+
     let helios = helios::client();
 
     let gas_price = helios.get_gas_price().await.expect("get_gas_price failed");
 
-    gas_price.into()
+    let res = gas_price.into();
+
+    let end = ic_cdk::api::instruction_counter();
+    let end_b = ic_cdk::api::canister_balance();
+    log::warn!("Get gas price instructions: {}", end - start);
+    log::warn!("Get gas price balance diff: {}", start_b - end_b);
+
+    res
 }
 
 #[update]
 async fn estimate_gas(request: EstimateGasRequest) -> U256 {
+    let start = ic_cdk::api::instruction_counter();
+    let start_b = ic_cdk::api::canister_balance();
+
     let helios = helios::client();
 
     let gas_cost_estimation = helios
@@ -108,7 +121,14 @@ async fn estimate_gas(request: EstimateGasRequest) -> U256 {
         .await
         .expect("estimate_gas failed");
 
-    gas_cost_estimation.into()
+    let res = gas_cost_estimation.into();
+
+    let end = ic_cdk::api::instruction_counter();
+    let end_b = ic_cdk::api::canister_balance();
+    log::warn!("Estimate gas instructions: {}", end - start);
+    log::warn!("Estimate gas balance diff: {}", start_b - end_b);
+
+    res
 }
 
 #[update]

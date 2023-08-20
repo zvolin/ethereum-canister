@@ -1,10 +1,10 @@
 # Ethereum Canister
 
-Ethereum canister provides a trustless way to access Ethereum blockchain data in the ICP ecosystem.
-Under the hood, it utilizes the [`helios`](https://github.com/a16z/helios) light Ethereum client which
-is capable of verifying the authenticity of the data it fetches.
+The Ethereum canister offers a secure and trustless way to access Ethereum blockchain data within the ICP ecosystem.
+Behind the scenes, it leverages the [`helios`](https://github.com/a16z/helios) light Ethereum client.
+This client is equipped with the capability to validate the authenticity of fetched data.
 
-## Run and query the Ethereum canister
+## Running and using the Ethereum canister
 
 ```bash
 dfx start --clean --background --artificial-delay 100
@@ -16,7 +16,7 @@ dfx canister call ethereum_canister setup 'record {
     execution_rpc_url = "https://ethereum.publicnode.com";
     consensus_rpc_url = "https://www.lightclientdata.org";
 }'
-# use it
+# utilize it
 dfx canister call ethereum_canister erc20_balance_of 'record {
     contract = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
     account = "0xF977814e90dA44bFA03b6295A0616a897441aceC";
@@ -24,7 +24,7 @@ dfx canister call ethereum_canister erc20_balance_of 'record {
 (2_100_000_000_000_000 : nat) # canister's output
 ```
 
-## Run end-to-end canister tests
+## Running end-to-end canister tests
 
 ```bash
 dfx start --clean --background --artificial-delay 100
@@ -37,13 +37,12 @@ cargo nextest run --target x86_64-unknown-linux-gnu
 ## Design
 
 Ethereum canister is a thin wrapper around the `helios` light client.
-The client is kept as a global state. After it is initialized, it runs the periodic synchronization
-with the Ethereum consensus node in the background, while providing the trustless RPC API of the
-execution node for other canisters.
+The client operates as global state and conducts periodic synchronization with the Ethereum consensus node in the background.
+Canister exposes a trustless RPC API of the execution node from the `helios` for other canisters.
 
 ### Canister API
 
-The API definition for the Ethereum canister can be seen in the [`candid.did` file](src/ethereum_canister/candid.did).
+You can find the API definition for the Ethereum canister in the [`candid.did` file](src/ethereum_canister/candid.did).
 In addition to that, for Rust canisters, all the input types are specified in the separate crate
 [`interface`](src/interface/src/lib.rs) (will probably use a rename in the future)
 that doesn't depend on `helios` directly and uses just a much lighter `ethers-core` for that matter.
@@ -52,17 +51,17 @@ The canister mostly just exposes the functions from the underlying helios client
 Ethereum will likely be familiar with them too so there is no point in trying to be innovative there. Those usually just
 have the same name, take the same arguments, and return the same types (or their `Candid` counterparts).
 
-Depending on whether the function requires making an RPC call to the execution node or not, it's either marked as an
-`update` or `query` function. Examples of queries can be `get_block_number` or `get_gas_price`, which just take information
-from already synchronized blocks. Examples of updates are calling the function of a contract or estimating the gas for
-a transaction as it requires fetching addresses and other data.
+Functions are categorized as update or query based on whether they involve making an RPC call to the execution node or not.
+Examples of queries can be `get_block_number` or `get_gas_price`, which just take information from already synchronized blocks.
+Examples of updates are calling the function of a contract or estimating the gas for a transaction as it requires fetching
+the addresses and other data.
 
 For the smart contract standards like the erc20 or erc721 the exposed API's are in form `${standard_name}_${function_name}`
 eg. `erc20_balance_of`. The parameters to those functions are Candid's equivalents for the parameters from the contract's standard ABI.
 It is on the ethereum canister to properly encode them before making a `call`.
 
-As for now, the only exposed function that doesn't conform to the above is the `setup` function, which configures and starts
-the helios client. It is required to be called before any other function, otherwise, the called function will return an error.
+Presently, the setup function is the only exception to the aforementioned categorization. It is responsible for configuring and
+initiating the helios client. It is required to be called before any other function, otherwise, the called function will return an error.
 It takes urls to the consensus node and execution node the client will connect to, as well as the type of 
 network it should operate on and an optional weak subjectivity checkpoint, a trusted hash of a block that nodes agree on. If not
 provided, the last checkpoint from provided consensus node will be taken. Please note that providing a checkpoint that is too old
@@ -71,22 +70,22 @@ in some cases exceeding the limits of an update call.
 
 ### Synchronization
 
-The background loop is using `ic_cdk_timers::set_timer_interval` and runs in 12s intervals which is
-equal to the Ethereum slot time. This is the only place where the running helios client is ever mutated
-and the time of locking for updating was reduced to the required minimum which should be unnoticeable.
+The background loop utilizes ic_cdk_timers::set_timer_interval and operates at 12-second intervals, mirroring the Ethereum slot time.
+This is the only place where the running helios client is ever mutated and the time of locking for updating was reduced to the
+required minimum which should be unnoticeable.
 
 ### Upgrades
 
-The canister stores its configuration and the last checkpoint it has reached in stable memory. When upgrading the canister
+The canister stores its configuration and the latest checkpoint it has reached in stable memory. When upgrading the canister
 it should restart the helios client itself with the previous configuration and the checkpoint that was already trusted. The last
 64 blocks will be re-fetched.
 
 ### Error handling
 
-Researching the approaches to error handling in inter-canister calls yields two results: returning the `Result`s
-or just panicking when something goes wrong. The panicking way was chosen, as the `Result`s seemed less ergonomic for
-potential developers and they feel a bit inconsistent as `CallResult` already has `CanisterError` and `CanisterReject`
-variants. Also going with panics and having the state reverted felt more familiar with the smart contracts on other blockchains.
+Exploring error handling strategies for inter-canister calls reveals two options: returning Results or triggering panics upon errors.
+The panicking way was chosen, as the `Result`s seemed less ergonomic for potential developers and they feel a bit inconsistent
+as `CallResult` already has `CanisterError` and `CanisterReject` variants. Also going with the panics and having the state reverted
+felt more familiar with the smart contracts on other blockchains.
 
 ## Implementation notes
 
@@ -127,9 +126,9 @@ and it was [already upstreamed](https://github.com/gakonst/ethers-rs/pull/2536).
 
 ## Cost analysis
 
-The measurements below were taken using a local `dfx` network setup. They included additional logs and logic in the canister's code and
-its dependencies. Those measurements are not precise and shouldn't be taken as truth, rather just to shed some
-light on the potential costs.
+The measurements presented below were acquired through a local dfx network setup. These measurements encompass supplementary
+logs and logic integrated into the canister's code and its dependencies. Those measurements are not precise and shouldn't be
+taken as truth, rather just to shed some light on the potential costs.
 
 |                            | call cost [cycles] | payments [cycles] |  instructions | https outcalls |
 |:---------------------------|-------------------:|------------------:|--------------:|---------------:|
@@ -145,6 +144,7 @@ light on the potential costs.
 | erc721_owner_of  milady    |     20_866_407_305 |    20_865_374_497 |    25_107_423 |             13 |
 
 All the functions were measured with the advancing (sync loop) disabled except the advance itself.
+
 All the functions were measured with 5 repetitions and the maximum acquired value was presented in the table.
 
 The `setup` function was measured by fetching the latest checkpoint from the consensus node.
@@ -165,11 +165,11 @@ The 'https outcalls' was measured by counting the calls to the `http::get` and `
 
 Https outcalls are the biggest factor of the costs and it should be the primary focus when optimizing.
 
-The most pricey method is the `setup` call, as it has to initialize everything for the first time and fetch the last 64 blocks.
-Unfortunately, it uses mostly the beacon API which is a restful http api, not a json-rpc like the execution API, so requests cannot
-be batched easily. And even then, a single block can be bigger than 1MB so fetching two at the time could exceed the limit
-[of 2MB](https://internetcomputer.org/docs/current/developer-docs/integrations/https-outcalls/https-outcalls-how-it-works) for
-the https outcall.
+Among the methods, the setup call incurs the highest cost due to its requirement to initialize everything for the first time
+and retrieve the last 64 blocks. Unfortunately, it uses mostly the beacon API which is a restful http api, not a json-rpc like
+the execution API, so requests cannot be batched easily. And even then, a single block can be bigger than 1MB so fetching two
+at the time could exceed the limit [of 2MB](https://internetcomputer.org/docs/current/developer-docs/integrations/https-outcalls/https-outcalls-how-it-works)
+for the https outcall.
 
 However, it seems to be possible to heavily optimize all the execution RPC calls. Here is a sample log from the smart contract call.
 
@@ -227,18 +227,16 @@ execution::evm] fetch evm state for address=0x5af0d9827e0c53e4799bb226655a1de152
 
 </details>
 
-The first thing is `Evm::batch_fetch_accounts` could be optimized to only make a single request for fetching codes and proofs after creating the access list.
-Also `ExecutionClient::fetch_account` could fetch the code and proof in one go. That would reduce the amount of https outcalls used in this specific case
-from 13 to 5.
-Another thing worth trying is finding what additional slots will be needed for the evm execution to prefetch them too, or find a way to get the list of
-all missing addresses from `revm` at once, without resimulating (but this may require changes in `revm` itself). Depending on the results this could further reduce
-the amounts of calls from 5 to 3 or even 2.
+Firstly, optimizing Evm::batch_fetch_accounts could involve consolidating requests to fetch codes and proofs into a single operation after establishing the access list.
+Also `ExecutionClient::fetch_account` could fetch the code and proof in one go. That would reduce the amount of https outcalls used in this specific case from 13 to 5.
+Another avenue to explore is determining the additional required slots for EVM execution and pre-fetching them. Alternatively, seeking a method to acquire a
+comprehensive list of missing addresses from revm in a single instance—without resimulation—could be pursued, albeit this might entail modifications in revm.
+Depending on the outcomes, this might lead to a potential reduction in the number of calls from 5 down to 3 or possibly even 2.
 
 ### Canister 
 
-The initial development was mainly focused on getting the `helios` and `ethers` to the point where they operate correctly in the ICP environment rather than on
-aligning to the best practices and state of the art canisters implementation. A few other Rust canisters (eg. `bitcoin-canister`) and also examples from `ic_cdk`
-were researched to see what is the common way of doing things, but there is much room for improvement. Things like controllers, metrics collection,
-API design, handling payments, and guarding some methods from public usage should be discussed and researched further.
+The initial development was mainly focused on getting the `helios` and `ethers` to the point where they operate correctly in the ICP environment
+The next step would be to apply all the best practices for canisters implementation including things like controllers, metrics collection,
+API design, handling payments, and guarding some methods from public usage.
 
-Also, it would be good to expose the whole `helios` API and start using this canister or showing it to the community for further input.
+Also exposing the full helios API and seeking community input sounds like a neat idea.

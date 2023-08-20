@@ -1,0 +1,45 @@
+common::http::icp] POST https://ethereum.publicnode.com {"id":0,"jsonrpc":"2.0","method":"eth_createAccessList","params":[{"type":"0x02","to":"0x5af0d9827e0c53e4799bb226655a1de152a425a5","gas":"0x5f5e100","data":"0x6352211e0000000000000000000000000000000000000000000000000000000000001e5d","accessList":[],"maxPriorityFeePerGas":"0x0","maxFeePerGas":"0x0"},"0x111d0e5"]}
+common::http::icp] POST https://ethereum.publicnode.com {"id":1,"jsonrpc":"2.0","method":"eth_getProof","params":["0x5af0d9827e0c53e4799bb226655a1de152a425a5",["0x54a8fc6a2a9e7e91706be865e93ec51a73727c47639b740f76ecd87ef67aaffa","0x0000000000000000000000000000000000000000000000000000000000000002","0x405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb9789"],"0x111d0e5"]}
+common::http::icp] POST https://ethereum.publicnode.com {"id":2,"jsonrpc":"2.0","method":"eth_getProof","params":["0x0000000000000000000000000000000000000000",[],"0x111d0e5"]}
+common::http::icp] POST https://ethereum.publicnode.com {"id":3,"jsonrpc":"2.0","method":"eth_getProof","params":["0x5af0d9827e0c53e4799bb226655a1de152a425a5",[],"0x111d0e5"]}
+common::http::icp] POST https://ethereum.publicnode.com {"id":4,"jsonrpc":"2.0","method":"eth_getProof","params":["0x388c818ca8b9251b393131c08a736a67ccb19297",[],"0x111d0e5"]}
+common::http::icp] POST https://ethereum.publicnode.com {"id":5,"jsonrpc":"2.0","method":"eth_getCode","params":["0x388c818ca8b9251b393131c08a736a67ccb19297","0x111d0e5"]}
+common::http::icp] POST https://ethereum.publicnode.com {"id":6,"jsonrpc":"2.0","method":"eth_getCode","params":["0x5af0d9827e0c53e4799bb226655a1de152a425a5","0x111d0e5"]}
+common::http::icp] POST https://ethereum.publicnode.com {"id":7,"jsonrpc":"2.0","method":"eth_getCode","params":["0x5af0d9827e0c53e4799bb226655a1de152a425a5","0x111d0e5"]}
+
+execution::evm] fetch basic evm state for address=0x0000000000000000000000000000000000000000
+execution::evm] fetch basic evm state for address=0x388c818ca8b9251b393131c08a736a67ccb19297
+execution::evm] fetch basic evm state for address=0x5af0d9827e0c53e4799bb226655a1de152a425a5
+execution::evm] fetch evm state for address=0x5af0d9827e0c53e4799bb226655a1de152a425a5, slot=38292851690199200197994960496712248457597506228771887340217700269531888005114
+
+execution::evm] Missing slots: MissingSlots { address: 0x5af0d9827e0c53e4799bb226655a1de152a425a5, slots: [0x54a8fc6a2a9e7e91706be865e93ec51a73727c47639b740f76ecd87ef67aaffa] }
+common::http::icp] POST https://ethereum.publicnode.com {"id":8,"jsonrpc":"2.0","method":"eth_getProof","params":["0x5af0d9827e0c53e4799bb226655a1de152a425a5",["0x54a8fc6a2a9e7e91706be865e93ec51a73727c47639b740f76ecd87ef67aaffa"],"0x111d0e5"]}
+common::http::icp] POST https://ethereum.publicnode.com {"id":9,"jsonrpc":"2.0","method":"eth_getCode","params":["0x5af0d9827e0c53e4799bb226655a1de152a425a5","0x111d0e5"]}
+
+execution::evm] fetch basic evm state for address=0x0000000000000000000000000000000000000000
+execution::evm] fetch basic evm state for address=0x388c818ca8b9251b393131c08a736a67ccb19297
+execution::evm] fetch basic evm state for address=0x5af0d9827e0c53e4799bb226655a1de152a425a5
+execution::evm] fetch evm state for address=0x5af0d9827e0c53e4799bb226655a1de152a425a5, slot=38292851690199200197994960496712248457597506228771887340217700269531888005114
+execution::evm] fetch evm state for address=0x5af0d9827e0c53e4799bb226655a1de152a425a5, slot=2
+
+execution::evm] Missing slots: MissingSlots { address: 0x5af0d9827e0c53e4799bb226655a1de152a425a5, slots: [0x0000000000000000000000000000000000000000000000000000000000000002] }
+common::http::icp] POST https://ethereum.publicnode.com {"id":10,"jsonrpc":"2.0","method":"eth_getProof","params":["0x5af0d9827e0c53e4799bb226655a1de152a425a5",["0x0000000000000000000000000000000000000000000000000000000000000002","0x54a8fc6a2a9e7e91706be865e93ec51a73727c47639b740f76ecd87ef67aaffa"],"0x111d0e5"]}
+common::http::icp] POST https://ethereum.publicnode.com {"id":11,"jsonrpc":"2.0","method":"eth_getCode","params":["0x5af0d9827e0c53e4799bb226655a1de152a425a5","0x111d0e5"]}
+
+execution::evm] fetch basic evm state for address=0x0000000000000000000000000000000000000000
+execution::evm] fetch basic evm state for address=0x388c818ca8b9251b393131c08a736a67ccb19297
+execution::evm] fetch basic evm state for address=0x5af0d9827e0c53e4799bb226655a1de152a425a5
+execution::evm] fetch evm state for address=0x5af0d9827e0c53e4799bb226655a1de152a425a5, slot=38292851690199200197994960496712248457597506228771887340217700269531888005114
+execution::evm] fetch evm state for address=0x5af0d9827e0c53e4799bb226655a1de152a425a5, slot=2
+execution::evm] fetch evm state for address=0x5af0d9827e0c53e4799bb226655a1de152a425a5, slot=29102676481673041902632991033461445430619272659676223336789171408008386418569
+
+execution::evm] Missing slots: MissingSlots { address: 0x5af0d9827e0c53e4799bb226655a1de152a425a5, slots: [0x405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb9789] }
+common::http::icp] POST https://ethereum.publicnode.com {"id":12,"jsonrpc":"2.0","method":"eth_getProof","params":["0x5af0d9827e0c53e4799bb226655a1de152a425a5",["0x405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb9789","0x54a8fc6a2a9e7e91706be865e93ec51a73727c47639b740f76ecd87ef67aaffa","0x0000000000000000000000000000000000000000000000000000000000000002"],"0x111d0e5"]}
+common::http::icp] POST https://ethereum.publicnode.com {"id":13,"jsonrpc":"2.0","method":"eth_getCode","params":["0x5af0d9827e0c53e4799bb226655a1de152a425a5","0x111d0e5"]}
+
+execution::evm] fetch basic evm state for address=0x0000000000000000000000000000000000000000
+execution::evm] fetch basic evm state for address=0x388c818ca8b9251b393131c08a736a67ccb19297
+execution::evm] fetch basic evm state for address=0x5af0d9827e0c53e4799bb226655a1de152a425a5
+execution::evm] fetch evm state for address=0x5af0d9827e0c53e4799bb226655a1de152a425a5, slot=38292851690199200197994960496712248457597506228771887340217700269531888005114
+execution::evm] fetch evm state for address=0x5af0d9827e0c53e4799bb226655a1de152a425a5, slot=2
+execution::evm] fetch evm state for address=0x5af0d9827e0c53e4799bb226655a1de152a425a5, slot=29102676481673041902632991033461445430619272659676223336789171408008386418569

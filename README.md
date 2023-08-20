@@ -43,11 +43,10 @@ Canister exposes a trustless RPC API of the execution node from the `helios` for
 ### Canister API
 
 You can find the API definition for the Ethereum canister in the [`candid.did` file](src/ethereum_canister/candid.did).
-In addition to that, for Rust canisters, all the input types are specified in the separate crate
-[`interface`](src/interface/src/lib.rs) (will probably use a rename in the future)
-that doesn't depend on `helios` directly and uses just a much lighter `ethers-core` for that matter.
+Additionally all the api types for Rust canisters are in the [`interface`](src/interface/src/lib.rs) crate
+(will probably use a rename in the future) that doesn't depend on `helios` directly but on a lighter `ethers-core` for that matter.
 
-The canister mostly just exposes the functions from the underlying helios client. Most of the users familiar with
+The canister mostly just exposes functions from the underlying helios client. Most of the users familiar with
 Ethereum will likely be familiar with them too so there is no point in trying to be innovative there. Those usually just
 have the same name, take the same arguments, and return the same types (or their `Candid` counterparts).
 
@@ -70,8 +69,8 @@ in some cases exceeding the limits of an update call.
 
 ### Synchronization
 
-The background loop utilizes ic_cdk_timers::set_timer_interval and operates at 12-second intervals, mirroring the Ethereum slot time.
-This is the only place where the running helios client is ever mutated and the time of locking for updating was reduced to the
+The background loop utilizes `ic_cdk_timers::set_timer_interval` and operates at 12-second intervals, mirroring the Ethereum slot time.
+This is the only place where the running helios client is ever mutated and the time of locking for the updates was reduced to the
 required minimum which should be unnoticeable.
 
 ### Upgrades
@@ -100,10 +99,10 @@ The changes were made in a manner that helios still works perfectly fine for nat
 the ICP and no longer the browsers.
 
 The changes include:
-- updating the helios and making it compatible with the rust `stable` toolchain
-- getting rid of any occurrences of wasm-bindgen, glue-timers, and other browser-related wasm dependencies
-- getting rid of tokio-related stuff that is incompatible with wasm
-- using ethers-core where possible and removing ethers-providers entirely
+- updating the `helios` and making it compatible with the rust `stable` toolchain
+- getting rid of any occurrences of `wasm-bindgen`, `glue-timers`, and other browser-related wasm dependencies
+- getting rid of `tokio`-related stuff that is incompatible with wasm
+- using `ethers-core` where possible and removing `ethers-providers` entirely
 - replace `reqwest` with https outcalls when targeting wasm
 - update the `revm` to v3 and introduce a way to fetch missing slots outside in an async manner
 - change the updating logic to only lock for a short period and add proper shutdown and cleanup
@@ -121,14 +120,14 @@ like [`instant`](https://github.com/sebcrozet/instant) and [`futures-timer`](htt
 [`gloo-timers`](https://github.com/rustwasm/gloo), guard the http implementation behind the feature flag and add a way for a user
 to add a custom provider.
 
-There was one change made to the ethers, allowing the use of `ethers-contract` without the need to depend on `ethers-providers
+There was one change made to the ethers, allowing the use of `ethers-contract` without the need to depend on `ethers-providers`
 and it was [already upstreamed](https://github.com/gakonst/ethers-rs/pull/2536).
 
 ## Cost analysis
 
-The measurements presented below were acquired through a local dfx network setup. These measurements encompass supplementary
-logs and logic integrated into the canister's code and its dependencies. Those measurements are not precise and shouldn't be
-taken as truth, rather just to shed some light on the potential costs.
+The measurements presented below were acquired on a local dfx network setup. These measurements encompass supplementary
+logs and logic integrated into the canister's code and its dependencies. They are not precise and shouldn't be taken as truth,
+rather just to shed some light on the potential costs.
 
 |                            | call cost [cycles] | payments [cycles] |  instructions | https outcalls |
 |:---------------------------|-------------------:|------------------:|--------------:|---------------:|
@@ -227,7 +226,7 @@ execution::evm] fetch evm state for address=0x5af0d9827e0c53e4799bb226655a1de152
 
 </details>
 
-Firstly, optimizing Evm::batch_fetch_accounts could involve consolidating requests to fetch codes and proofs into a single operation after establishing the access list.
+Firstly, optimizing `Evm::batch_fetch_accounts` could involve consolidating requests to fetch codes and proofs into a single operation after establishing the access list.
 Also `ExecutionClient::fetch_account` could fetch the code and proof in one go. That would reduce the amount of https outcalls used in this specific case from 13 to 5.
 Another avenue to explore is determining the additional required slots for EVM execution and pre-fetching them. Alternatively, seeking a method to acquire a
 comprehensive list of missing addresses from revm in a single instance—without resimulation—could be pursued, albeit this might entail modifications in revm.
